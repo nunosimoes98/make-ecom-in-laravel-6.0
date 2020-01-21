@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 07, 2019 at 07:16 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Host: localhost
+-- Generation Time: Jan 21, 2020 at 04:25 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,7 +41,7 @@ CREATE TABLE `admins` (
   `users_access` tinyint(4) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -49,7 +49,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `username`, `password`, `type`, `categories_view_access`, `categories_edit_access`, `categories_full_access`, `products_access`, `orders_access`, `users_access`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Admin', 0, 0, 0, 0, 0, 0, 1, '2018-12-15 00:00:00', '2019-02-18 08:38:58'),
+(1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'Admin', 1, 1, 1, 0, 0, 0, 1, '2018-12-15 00:00:00', '2019-12-25 15:09:42'),
 (2, 'amit', 'e10adc3949ba59abbe56e057f20f883e', 'Admin', 0, 0, 0, 0, 0, 0, 1, '2019-07-12 14:03:44', '2019-07-12 08:33:44'),
 (3, 'john', 'e10adc3949ba59abbe56e057f20f883e', 'Sub Admin', 0, 0, 0, 1, 1, 1, 1, '2019-07-21 08:07:19', '2019-07-31 15:34:26'),
 (4, 'steve', 'e10adc3949ba59abbe56e057f20f883e', 'Sub Admin', 0, 0, 0, 0, 0, 0, 1, '2019-07-21 08:08:05', '2019-07-22 09:49:24'),
@@ -111,14 +111,14 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
-  `parent_id` int(11) DEFAULT '0',
+  `parent_id` int(11) DEFAULT 0,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `meta_keywords` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint(4) NOT NULL DEFAULT 1,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -155,7 +155,7 @@ CREATE TABLE `cms_pages` (
   `meta_keywords` varchar(255) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -180,7 +180,7 @@ CREATE TABLE `cod_pincodes` (
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3449,7 +3449,7 @@ CREATE TABLE `currencies` (
   `exchange_rate` float NOT NULL,
   `status` tinyint(4) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3478,7 +3478,7 @@ CREATE TABLE `delivery_addresses` (
   `country` varchar(255) NOT NULL,
   `pincode` varchar(255) NOT NULL,
   `mobile` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -3493,7 +3493,7 @@ INSERT INTO `delivery_addresses` (`id`, `user_id`, `user_email`, `name`, `addres
 (4, 15, 'amit5600@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '+918054711805', '2019-04-14 04:29:10', '2019-04-14 04:29:10'),
 (5, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '+919800000000', '2019-08-11 13:49:14', '2019-08-11 08:19:14'),
 (6, 18, 'amit3535@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '+919800000000', '2019-07-16 09:55:57', '2019-07-16 09:55:57'),
-(7, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', 'India', '141001', '08054711805', '2019-09-15 05:53:42', '2019-09-15 05:53:42');
+(7, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', 'India', '141001', '9800000000', '2019-12-25 15:15:17', '2019-12-25 09:45:17');
 
 -- --------------------------------------------------------
 
@@ -3508,7 +3508,7 @@ CREATE TABLE `enquiries` (
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3544,7 +3544,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2018_04_16_135232_create_products_attributes_table', 5),
 (7, '2018_06_21_174929_create_cart_table', 6),
 (8, '2018_07_09_150844_create_coupons_table', 7),
-(9, '2019_08_25_064509_create_newsletter_subscribers_table', 8);
+(9, '2019_08_25_064509_create_newsletter_subscribers_table', 8),
+(10, '2019_10_19_141102_create_wish_list_table', 9);
 
 -- --------------------------------------------------------
 
@@ -3555,7 +3556,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `newsletter_subscribers` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3592,7 +3593,7 @@ CREATE TABLE `orders` (
   `payment_method` varchar(255) NOT NULL,
   `grand_total` float NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3641,10 +3642,45 @@ INSERT INTO `orders` (`id`, `user_id`, `user_email`, `name`, `address`, `city`, 
 (39, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 2600, '2019-06-26 16:34:46', '2019-06-26 11:04:46'),
 (40, 18, 'amit3535@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 0, '', 0, 'New', 'Paypal', 1000, '2019-07-16 15:26:04', '2019-07-16 09:56:04'),
 (41, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 3400, '2019-08-04 15:02:28', '2019-08-04 09:32:28'),
-(42, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 3400, '2019-08-04 15:07:30', '2019-08-04 09:37:30'),
-(43, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 3400, '2019-08-11 13:37:38', '2019-08-11 08:07:38'),
-(44, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 3400, '2019-08-11 13:49:57', '2019-08-11 08:19:57'),
-(45, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 100, '', 0, 'New', 'COD', 1100, '2019-09-15 11:24:27', '2019-09-15 05:54:27');
+(42, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 3400, '2019-09-11 15:07:30', '2019-11-12 03:12:32'),
+(43, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 3400, '2019-10-08 13:37:38', '2019-11-12 03:12:16'),
+(44, 17, 'amit300@yopmail.com', 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', '141001', 'India', '+919800000000', 100, '', 0, 'New', 'COD', 3400, '2019-10-08 13:49:57', '2019-11-12 03:12:05'),
+(45, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 100, '', 0, 'New', 'COD', 1100, '2019-10-09 11:24:27', '2019-11-12 03:11:55'),
+(46, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'COD', 1000, '2019-11-12 03:04:34', '2019-11-11 21:34:34'),
+(47, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'COD', 1000, '2019-11-12 03:10:40', '2019-11-11 21:40:40'),
+(48, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'COD', 1000, '2019-11-12 03:11:25', '2019-11-11 21:41:25'),
+(49, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-05 15:42:58', '2019-12-05 10:12:58'),
+(50, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-05 15:51:11', '2019-12-05 10:21:11'),
+(51, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-05 15:52:00', '2019-12-05 10:22:00'),
+(52, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:16:41', '2019-12-08 06:46:41'),
+(53, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:17:21', '2019-12-08 06:47:21'),
+(54, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:17:37', '2019-12-08 06:47:37'),
+(24500000, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:27:22', '2019-12-08 06:57:22'),
+(24500001, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:40:19', '2019-12-08 07:10:19'),
+(24500002, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:43:16', '2019-12-08 07:13:16'),
+(24500003, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:46:07', '2019-12-08 07:16:07'),
+(24500004, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:52:00', '2019-12-08 07:22:00'),
+(24500005, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:54:28', '2019-12-08 07:24:28'),
+(24500006, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 12:59:52', '2019-12-08 07:29:52'),
+(24500007, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 13:03:25', '2019-12-08 07:33:25'),
+(24500008, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 13:14:10', '2019-12-08 07:44:10'),
+(24500009, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 13:18:36', '2019-12-08 07:48:36'),
+(24500010, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 13:21:25', '2019-12-08 07:51:25'),
+(24500011, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 13:26:48', '2019-12-08 07:56:48'),
+(24500012, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 13:29:27', '2019-12-08 07:59:27'),
+(24500013, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 1000, '2019-12-08 13:39:23', '2019-12-08 08:09:23'),
+(24500014, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 2000, '2019-12-08 14:00:54', '2019-12-08 08:30:54'),
+(24500015, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 2000, '2019-12-08 14:05:29', '2019-12-08 08:35:29'),
+(24500016, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Payumoney', 2000, '2019-12-08 14:07:45', '2019-12-08 08:37:45'),
+(24500017, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'Payment Captured', 'Payumoney', 1000, '2019-12-09 15:15:53', '2019-12-09 10:04:56'),
+(24500018, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'Payment Captured', 'Payumoney', 1000, '2019-12-09 15:36:03', '2019-12-09 10:06:31'),
+(24500019, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'Payment Captured', 'Payumoney', 1000, '2019-12-09 15:40:01', '2019-12-12 09:17:16'),
+(24500020, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'Payment Captured', 'Payumoney', 1000, '2019-12-09 15:41:00', '2019-12-12 09:17:16'),
+(24500078, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'Payment Failed', 'Payumoney', 1000, '2019-12-09 15:41:50', '2019-12-12 09:16:35'),
+(24500079, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '08054711805', 0, '', 0, 'New', 'Paypal', 1000, '2019-12-10 01:17:35', '2019-12-09 19:47:35'),
+(24500080, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '9800000000', 0, '', 0, 'New', 'Paypal', 1000, '2019-12-10 01:22:22', '2019-12-09 19:52:22'),
+(24500081, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '9800000000', 0, '', 0, 'New', 'Paypal', 1000, '2019-12-24 14:45:41', '2019-12-24 09:15:41'),
+(24500082, 23, 'amit2000@yopmail.com', 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', '141001', 'India', '9800000000', 0, '', 0, 'New', 'COD', 1000, '2019-12-25 15:16:24', '2019-12-25 09:46:24');
 
 -- --------------------------------------------------------
 
@@ -3664,7 +3700,7 @@ CREATE TABLE `orders_products` (
   `product_price` float NOT NULL,
   `product_qty` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -3740,7 +3776,45 @@ INSERT INTO `orders_products` (`id`, `order_id`, `user_id`, `product_id`, `produ
 (66, 43, 17, 10, 'BCT01-M', 'Blue Casual Tshirt', 'Medium', 'Blue', 1500, 1, '2019-08-11 13:37:38', '2019-08-11 08:07:38'),
 (67, 44, 17, 10, 'BCT01-S', 'Blue Casual Tshirt', 'Small', 'Blue', 1500, 1, '2019-08-11 13:49:59', '2019-08-11 08:19:59'),
 (68, 44, 17, 10, 'BCT01-M', 'Blue Casual Tshirt', 'Medium', 'Blue', 1800, 1, '2019-08-11 13:49:59', '2019-08-11 08:19:59'),
-(69, 45, 23, 18, 'RT001-S', 'Red TShirt', 'Small', 'Red', 1000, 1, '2019-09-15 11:24:27', '2019-09-15 05:54:27');
+(69, 45, 23, 18, 'RT001-S', 'Red TShirt', 'Small', 'Red', 1000, 1, '2019-09-15 11:24:27', '2019-09-15 05:54:27'),
+(70, 46, 23, 21, 'Bl001-Small', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-11-12 03:04:34', '2019-11-11 21:34:34'),
+(71, 47, 23, 21, 'Bl001-Small', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-11-12 03:10:40', '2019-11-11 21:40:40'),
+(72, 48, 23, 21, 'Bl001-Small', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-11-12 03:11:25', '2019-11-11 21:41:25'),
+(73, 49, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-05 15:42:58', '2019-12-05 10:12:58'),
+(74, 50, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-05 15:51:11', '2019-12-05 10:21:11'),
+(75, 51, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-05 15:52:00', '2019-12-05 10:22:00'),
+(76, 52, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:16:41', '2019-12-08 06:46:41'),
+(77, 53, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:17:21', '2019-12-08 06:47:21'),
+(78, 54, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:17:37', '2019-12-08 06:47:37'),
+(79, 24500000, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:27:22', '2019-12-08 06:57:22'),
+(80, 24500001, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:40:19', '2019-12-08 07:10:19'),
+(81, 24500002, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:43:16', '2019-12-08 07:13:16'),
+(82, 24500003, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:46:07', '2019-12-08 07:16:07'),
+(83, 24500004, 23, 21, 'Bl001-Small', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:52:00', '2019-12-08 07:22:00'),
+(84, 24500005, 23, 21, 'Bl001-Small', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:54:28', '2019-12-08 07:24:28'),
+(85, 24500006, 23, 21, 'Bl001-Small', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 12:59:52', '2019-12-08 07:29:52'),
+(86, 24500007, 23, 21, 'Bl001-Small', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 13:03:25', '2019-12-08 07:33:25'),
+(87, 24500008, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 13:14:10', '2019-12-08 07:44:10'),
+(88, 24500009, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 13:18:36', '2019-12-08 07:48:36'),
+(89, 24500010, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 13:21:25', '2019-12-08 07:51:25'),
+(90, 24500011, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 13:26:48', '2019-12-08 07:56:48'),
+(91, 24500012, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 13:29:27', '2019-12-08 07:59:27'),
+(92, 24500013, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 13:39:23', '2019-12-08 08:09:23'),
+(93, 24500014, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 14:00:54', '2019-12-08 08:30:54'),
+(94, 24500014, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 14:00:54', '2019-12-08 08:30:54'),
+(95, 24500015, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 14:05:29', '2019-12-08 08:35:29'),
+(96, 24500015, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 14:05:29', '2019-12-08 08:35:29'),
+(97, 24500016, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 14:07:45', '2019-12-08 08:37:45'),
+(98, 24500016, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-08 14:07:45', '2019-12-08 08:37:45'),
+(99, 24500017, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-09 15:15:53', '2019-12-09 09:45:53'),
+(100, 24500018, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-09 15:36:03', '2019-12-09 10:06:03'),
+(101, 24500019, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-09 15:40:01', '2019-12-09 10:10:01'),
+(102, 24500020, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-09 15:41:00', '2019-12-09 10:11:00'),
+(103, 24500078, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-09 15:41:50', '2019-12-09 10:11:50'),
+(104, 24500079, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-10 01:17:35', '2019-12-09 19:47:35'),
+(105, 24500080, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-10 01:22:22', '2019-12-09 19:52:22'),
+(106, 24500081, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-24 14:45:41', '2019-12-24 09:15:41'),
+(107, 24500082, 23, 23, 'BT002-S', 'Black T-Shirt', 'Small', 'Black', 1000, 1, '2019-12-25 15:16:24', '2019-12-25 09:46:24');
 
 -- --------------------------------------------------------
 
@@ -3766,7 +3840,7 @@ CREATE TABLE `pincodes` (
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -5115,7 +5189,7 @@ CREATE TABLE `prepaid_pincodes` (
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -6472,8 +6546,8 @@ CREATE TABLE `products` (
   `weight` int(11) NOT NULL,
   `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `video` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `feature_item` tinyint(4) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `feature_item` tinyint(4) NOT NULL DEFAULT 0,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -6519,12 +6593,12 @@ CREATE TABLE `products_attributes` (
 --
 
 INSERT INTO `products_attributes` (`id`, `product_id`, `sku`, `size`, `price`, `stock`, `created_at`, `updated_at`) VALUES
-(6, 10, 'BCT01-S', 'Small', 1500.00, 6, '2018-05-15 11:40:25', '2019-08-11 08:19:59'),
-(7, 10, 'BCT01-M', 'Medium', 1800.00, 6, '2018-05-15 11:40:28', '2019-08-11 08:19:59'),
-(8, 11, 'FTS001-S', 'Small', 1200.00, 9, '2018-06-26 09:18:35', '2019-06-07 08:12:21'),
-(9, 21, 'Bl001-Small', 'Small', 1000.00, 7, '2019-06-07 08:26:59', '2019-07-16 09:56:05'),
-(10, 18, 'RT001-S', 'Small', 1000.00, 8, '2019-06-26 10:52:11', '2019-09-15 05:54:28'),
-(11, 23, 'BT002-S', 'Small', 1000.00, 10, '2019-09-26 08:39:19', '2019-09-26 08:39:19');
+(6, 10, 'BCT01-S', 'Small', 1500.00, 100, '2018-05-15 11:40:25', '2019-08-11 08:19:59'),
+(7, 10, 'BCT01-M', 'Medium', 1800.00, 100, '2018-05-15 11:40:28', '2019-08-11 08:19:59'),
+(8, 11, 'FTS001-S', 'Small', 1200.00, 100, '2018-06-26 09:18:35', '2019-06-07 08:12:21'),
+(9, 21, 'Bl001-Small', 'Small', 1000.00, 100, '2019-06-07 08:26:59', '2019-12-08 07:33:25'),
+(10, 18, 'RT001-S', 'Small', 1000.00, 100, '2019-06-26 10:52:11', '2019-09-15 05:54:28'),
+(11, 23, 'BT002-S', 'Small', 1000.00, 79, '2019-09-26 08:39:19', '2019-12-25 09:46:24');
 
 -- --------------------------------------------------------
 
@@ -6537,7 +6611,7 @@ CREATE TABLE `products_images` (
   `product_id` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -6564,7 +6638,7 @@ CREATE TABLE `shipping_charges` (
   `shipping_charges1001_2000g` int(11) NOT NULL,
   `shipping_charges2001_5000g` int(11) NOT NULL,
   `created_at` datetime NOT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -6836,8 +6910,8 @@ CREATE TABLE `users` (
   `mobile` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `admin` tinyint(1) DEFAULT '0',
-  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `admin` tinyint(1) DEFAULT 0,
+  `status` tinyint(4) NOT NULL DEFAULT 0,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -6848,29 +6922,51 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `address`, `city`, `state`, `country`, `pincode`, `mobile`, `email`, `password`, `admin`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Amit Gupta', '', '', '', '', '', '', 'amitphpprogrammer@gmail.com', '$2y$10$3I6cLW6xNL1IZVec1UPahOdA/S4PbXAh2SCoRMOPUE.EqTBV06mFu', 1, 0, 'DYtCJ20Ne5ygScQWPHOokeYOMXbKV2BOF2mYkJHskHWGg0tDCqoP50d0joBa', '2018-03-09 09:18:34', '2018-06-04 09:56:05'),
+(1, 'Amit Gupta', '', '', '', 'India', '', '', 'amitphpprogrammer@gmail.com', '$2y$10$3I6cLW6xNL1IZVec1UPahOdA/S4PbXAh2SCoRMOPUE.EqTBV06mFu', 1, 0, 'DYtCJ20Ne5ygScQWPHOokeYOMXbKV2BOF2mYkJHskHWGg0tDCqoP50d0joBa', '2018-03-09 09:18:34', '2018-06-04 09:56:05'),
 (2, 'Amit Gupta', '123 Mall Road', 'New Delhi', 'Delhi', 'India', '141001', '9800000000', 'amit100@yopmail.com', '$2y$10$yUPws5R.kIcy2CGUKJfUEe.t3G9QA9WEIJ4sm7q0KfQaZaXf7xcwa', 0, 1, 'YBeBEbdd3IJb3MY48gm1bF0NhUWujIwDTuDyihKq6Yd9dL1gRrnGDrbDW86y', '2018-08-31 09:17:18', '2019-01-31 11:49:01'),
-(3, 'Amit Gupta', '', '', '', '', '', '', 'amit100646@yopmail.com', '$2y$10$dD3FmfhMJHWNxClkx5cfu.zEqV16K0bOR9WJLWF0ZpEgeoWDT.o32', 0, 0, 'AUaLi6uH21i9eaOXbFlNriHGMo3BoxpBNh8ABkcrgv5hH9mKfFiQBscBkJsn', '2018-08-31 09:18:19', '2018-08-31 09:18:19'),
-(4, 'John', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '9800000000', 'john@yopmail.com', '$2y$10$CNwOV/ocptJajX7hwWe8wO86PFJwTvYkjjQWSLGGOxChAl.BBBipO', 0, 1, '2IGUMgzO09iGYUdJYcQQJC6bdTLBBPq3BsLKcojdby09Vc42Bmv2F1PsEcN8', '2018-08-31 09:26:01', '2019-03-24 09:57:26'),
-(5, 'Mike', '', '', '', '', '', '', 'mike1000@yahoo.com', '$2y$10$a9fgfK/K/jdJFxGQVavPM.3UvXC2FWpRzV/H4sytx1.NMwz/UlMBi', 0, 0, '9HdPQabUf8s75UZ4gKKI2vWD9c74rRAnoGLFt5WwVOpDQc2zLy1dQFwpXPAZ', '2018-09-01 11:35:21', '2018-09-01 11:35:21'),
-(6, 'Raj', '', '', '', '', '', '', 'raj@gmail.com', '$2y$10$wXQwSZLMkA1ZWpnUI35Zr.oQtAaKe2d9K1RThq7zBLlsLV4ukzip2', 0, 0, 'cSQdOPc6E1qH7xRwLR9wxPuaSFeuZDWpcjwenWQlmDWpwHpWko2nWw5Korsr', '2018-09-01 11:47:33', '2018-09-01 11:47:33'),
-(7, 'Amit Gupta', NULL, '', '', '', '', '', 'amit400@yopmail.com', '$2y$10$rd43vJDziNsdrJlsKbDZru/esOMhLAA8nJtCrMgglJ.ABDb7DwO0C', 0, 0, NULL, '2018-10-07 02:36:07', '2018-10-07 02:36:07'),
-(8, 'Steve', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '08054711805', 'steve@yopmail.com', '$2y$10$f1iChQYzBeYcG59bnlsZKexrCV.PF0kvZr1./Oa4omMqGafmZuRji', 0, 1, 'ENVpCTZxj6Q7EBerLcABOytYgzzuYaa5IffxFOu28G7HFCgN6zcmOLwIl4Pj', '2018-10-19 10:08:03', '2019-03-16 23:31:48'),
-(9, 'Amit Gupta', NULL, '', '', '', '', '', 'test@yopmail.com', '$2y$10$A6ov12TrJDxV580bx7VIjuvlRXvdliKtgdqKy87zz3JAbmoxobcHe', 0, 0, NULL, '2018-11-29 21:43:32', '2018-11-29 21:43:32'),
-(10, 'Amit Gupta', NULL, '', '', '', '', '', 'amit58395@yopmail.com', '$2y$10$7SV2k5/otjssdA9zXaRu6eHdruAniix/Ucw4kwJrUI9UjruYvPgsa', 0, 0, NULL, '2018-12-18 10:03:09', '2018-12-18 10:03:09'),
-(11, 'Amit Gupta', NULL, '', '', '', '', '', 'amit835783@yopmail.com', '$2y$10$as0CDsVU9LbfJqtp0M0VJ.oM85shKu4HHfHM1wUXiAkTeFV.6xI9i', 0, 0, 'VDofs1zg16G9P8oX1mznVzhoLi0Bse2dbPc0EOl5ymu9LIKlVYKvttfXA6BM', '2018-12-18 10:03:56', '2018-12-18 10:03:56'),
-(12, 'Amit Gupta', NULL, '', '', '', '', '', 'amit5000@yopmail.com', '$2y$10$bklnJWAnHgHQru97ohU8buIEjNsnw7uc6nrQlAQ3G2jDBE3wjVT0C', 0, 1, NULL, '2018-12-18 10:06:04', '2018-12-18 10:06:04'),
-(13, 'Amit Gupta', NULL, '', '', '', '', '', 'amit2100@yopmail.com', '$2y$10$OR7K9n2ZLEAY9FixC1ogcexOdm9j3JbIJiTtbBL8qBUEd9O1MyFkS', 0, 1, 'qwB0pxTaVPm08s8QUUQiKWRn0WEuFAQ2MzCPR768Cm01PNWxob3lKKkfQVT8', '2018-12-21 10:12:15', '2018-12-21 10:12:15'),
-(14, 'Amit Gupta', NULL, '', '', '', '', '', 'amit2070@yopmail.com', '$2y$10$vrOhOsmhANMOS/1yN6uONuMrOG16zMVOSIEAuV4LJ.jat5VyvCNdO', 0, 0, NULL, '2018-12-21 10:15:02', '2018-12-21 10:15:02'),
+(3, 'Amit Gupta', '', '', '', 'India', '', '', 'amit100646@yopmail.com', '$2y$10$dD3FmfhMJHWNxClkx5cfu.zEqV16K0bOR9WJLWF0ZpEgeoWDT.o32', 0, 0, 'AUaLi6uH21i9eaOXbFlNriHGMo3BoxpBNh8ABkcrgv5hH9mKfFiQBscBkJsn', '2018-08-31 09:18:19', '2018-08-31 09:18:19'),
+(4, 'John', 'Test Address', 'Ludhiana', 'Punjab', 'United States', '141001', '9800000000', 'john@yopmail.com', '$2y$10$CNwOV/ocptJajX7hwWe8wO86PFJwTvYkjjQWSLGGOxChAl.BBBipO', 0, 1, '2IGUMgzO09iGYUdJYcQQJC6bdTLBBPq3BsLKcojdby09Vc42Bmv2F1PsEcN8', '2018-08-31 09:26:01', '2019-03-24 09:57:26'),
+(5, 'Mike', '', '', '', 'United States', '', '', 'mike1000@yahoo.com', '$2y$10$a9fgfK/K/jdJFxGQVavPM.3UvXC2FWpRzV/H4sytx1.NMwz/UlMBi', 0, 0, '9HdPQabUf8s75UZ4gKKI2vWD9c74rRAnoGLFt5WwVOpDQc2zLy1dQFwpXPAZ', '2018-09-01 11:35:21', '2018-09-01 11:35:21'),
+(6, 'Raj', '', '', '', 'India', '', '', 'raj@gmail.com', '$2y$10$wXQwSZLMkA1ZWpnUI35Zr.oQtAaKe2d9K1RThq7zBLlsLV4ukzip2', 0, 0, 'cSQdOPc6E1qH7xRwLR9wxPuaSFeuZDWpcjwenWQlmDWpwHpWko2nWw5Korsr', '2018-09-01 11:47:33', '2018-09-01 11:47:33'),
+(7, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit400@yopmail.com', '$2y$10$rd43vJDziNsdrJlsKbDZru/esOMhLAA8nJtCrMgglJ.ABDb7DwO0C', 0, 0, NULL, '2018-10-07 02:36:07', '2018-10-07 02:36:07'),
+(8, 'Steve', 'Test Address', 'Ludhiana', 'Punjab', 'United States', '141001', '08054711805', 'steve@yopmail.com', '$2y$10$f1iChQYzBeYcG59bnlsZKexrCV.PF0kvZr1./Oa4omMqGafmZuRji', 0, 1, 'ENVpCTZxj6Q7EBerLcABOytYgzzuYaa5IffxFOu28G7HFCgN6zcmOLwIl4Pj', '2018-10-19 10:08:03', '2019-03-16 23:31:48'),
+(9, 'Amit Gupta', NULL, '', '', 'India', '', '', 'test@yopmail.com', '$2y$10$A6ov12TrJDxV580bx7VIjuvlRXvdliKtgdqKy87zz3JAbmoxobcHe', 0, 0, NULL, '2018-11-29 21:43:32', '2018-11-29 21:43:32'),
+(10, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit58395@yopmail.com', '$2y$10$7SV2k5/otjssdA9zXaRu6eHdruAniix/Ucw4kwJrUI9UjruYvPgsa', 0, 0, NULL, '2018-12-18 10:03:09', '2018-12-18 10:03:09'),
+(11, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit835783@yopmail.com', '$2y$10$as0CDsVU9LbfJqtp0M0VJ.oM85shKu4HHfHM1wUXiAkTeFV.6xI9i', 0, 0, 'VDofs1zg16G9P8oX1mznVzhoLi0Bse2dbPc0EOl5ymu9LIKlVYKvttfXA6BM', '2018-12-18 10:03:56', '2018-12-18 10:03:56'),
+(12, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit5000@yopmail.com', '$2y$10$bklnJWAnHgHQru97ohU8buIEjNsnw7uc6nrQlAQ3G2jDBE3wjVT0C', 0, 1, NULL, '2018-12-18 10:06:04', '2018-12-18 10:06:04'),
+(13, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit2100@yopmail.com', '$2y$10$OR7K9n2ZLEAY9FixC1ogcexOdm9j3JbIJiTtbBL8qBUEd9O1MyFkS', 0, 1, 'qwB0pxTaVPm08s8QUUQiKWRn0WEuFAQ2MzCPR768Cm01PNWxob3lKKkfQVT8', '2018-12-21 10:12:15', '2018-12-21 10:12:15'),
+(14, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit2070@yopmail.com', '$2y$10$vrOhOsmhANMOS/1yN6uONuMrOG16zMVOSIEAuV4LJ.jat5VyvCNdO', 0, 0, NULL, '2018-12-21 10:15:02', '2018-12-21 10:15:02'),
 (15, 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '+918054711805', 'amit5600@yopmail.com', '$2y$10$Dq0BSkC.bRObjzHQIz5cTOAHcALZk5VFvfYrc2I/QtVNNFY9cAzgi', 0, 1, 'zP5w5si1PsGMMCBrMkaH8zs9loz7UTiIRtGApY0C6dRHFNs9Q8TmcZqdfKXq', '2018-12-23 01:12:50', '2019-04-14 04:29:10'),
-(16, 'Amit Gupta', NULL, '', '', '', '', '', 'amit35363@yopmail.com', '$2y$10$WgbQKJ7vtiIMeHJ6JgU/8uU.p.Dk1msR2XLcBhQ5ni9p/s9VJaFBK', 0, 1, 'WFiYmzPeTtIdGcVLGSqUpAtPHcL8ACcdquLEq5uUfL7eSB8dcRVR5CyVhETr', '2018-12-23 01:30:13', '2019-01-31 11:50:31'),
+(16, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit35363@yopmail.com', '$2y$10$WgbQKJ7vtiIMeHJ6JgU/8uU.p.Dk1msR2XLcBhQ5ni9p/s9VJaFBK', 0, 1, 'WFiYmzPeTtIdGcVLGSqUpAtPHcL8ACcdquLEq5uUfL7eSB8dcRVR5CyVhETr', '2018-12-23 01:30:13', '2019-01-31 11:50:31'),
 (17, 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '+919800000000', 'amit300@yopmail.com', '$2y$10$nvADdd/V6KOgFZ6bf684q.SikY/0uc0kxw9d1On9905YC6lDJa0bu', 0, 1, NULL, '2019-05-30 09:44:54', '2019-08-11 08:19:14'),
 (18, 'Amit Gupta', 'Test Address', 'Ludhiana', 'Punjab', 'India', '141001', '+919800000000', 'amit3535@yopmail.com', '$2y$10$5SAXVsjIogwkkOtDAtemWOAGPc1lwk6pZ.nreSozzjr49fBKppNcW', 0, 1, NULL, '2019-06-28 08:28:52', '2019-07-16 09:55:57'),
-(19, 'Amit Gupta', NULL, '', '', '', '', '', 'amit24550@yopmail.com', '$2y$10$WQejyN9HIf0JmWT398p5WO2KFhHXvHXlHbiVJVb3VKmEmfCRQ3jfy', 0, 0, NULL, '2019-06-28 13:50:11', '2019-06-28 13:50:11'),
-(20, 'Amit Gupta', NULL, '', '', '', '', '', 'amit24353@yopmail.com', '$2y$10$QJr8JQBK0Nvxr4VeBevCg..X3UQdEDc5A4M/xwjRVjUp93cZO2zh2', 0, 0, NULL, '2019-06-28 17:21:13', '2019-06-28 17:21:13'),
-(21, 'Amit Gupta', NULL, '', '', '', '', '', 'amit2343500@yopmail.com', '$2y$10$WXFDyAd6W8DEaNnUqgdQT.mskBmeeUxRVRqqkT.2iNtZGr7J5wASa', 0, 0, NULL, '2019-06-28 13:01:49', '2019-06-28 13:01:49'),
-(22, 'Amit Gupta', NULL, '', '', '', '', '', 'amit20435430@yopmail.com', '$2y$10$gU351ktdr9dQvtTj85KzGu.0qdJKLpboziCaakxSkPp9rC0z2tiBK', 0, 0, NULL, '2019-06-29 01:35:53', '2019-06-29 01:35:53'),
-(23, 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', 'India', '141001', '08054711805', 'amit2000@yopmail.com', '$2y$10$9vm3Oknr8vKhlBZwZWzikusuozuaIW6znoBQ1IloHyRLIHSercoAS', 0, 1, NULL, '2019-09-15 06:45:36', '2019-09-15 05:53:40');
+(19, 'Amit Gupta', NULL, '', '', 'India', '', '', 'amit24550@yopmail.com', '$2y$10$WQejyN9HIf0JmWT398p5WO2KFhHXvHXlHbiVJVb3VKmEmfCRQ3jfy', 0, 0, NULL, '2019-06-28 13:50:11', '2019-06-28 13:50:11'),
+(20, 'Amit Gupta', NULL, '', '', 'United States', '', '', 'amit24353@yopmail.com', '$2y$10$QJr8JQBK0Nvxr4VeBevCg..X3UQdEDc5A4M/xwjRVjUp93cZO2zh2', 0, 0, NULL, '2019-06-28 17:21:13', '2019-06-28 17:21:13'),
+(21, 'Amit Gupta', NULL, '', '', 'United States', '', '', 'amit2343500@yopmail.com', '$2y$10$WXFDyAd6W8DEaNnUqgdQT.mskBmeeUxRVRqqkT.2iNtZGr7J5wASa', 0, 0, NULL, '2019-09-11 13:01:49', '2019-06-28 13:01:49'),
+(22, 'Amit Gupta', NULL, '', '', 'United States', '', '', 'amit20435430@yopmail.com', '$2y$10$gU351ktdr9dQvtTj85KzGu.0qdJKLpboziCaakxSkPp9rC0z2tiBK', 0, 0, NULL, '2019-10-16 01:35:53', '2019-06-29 01:35:53'),
+(23, 'Amit Gupta', '123 Mall Road', 'Ludhiana', 'Punjab', 'India', '141001', '9800000000', 'amit2000@yopmail.com', '$2y$10$9vm3Oknr8vKhlBZwZWzikusuozuaIW6znoBQ1IloHyRLIHSercoAS', 0, 1, NULL, '2019-10-16 06:45:36', '2019-12-25 09:45:17'),
+(24, 'Amit Gupta', NULL, '', '', 'Canada', '', '', 'amit2255@yopmail.com', '$2y$10$5Ttrte6Y8qg0.SM/fkILI.uzbYaaSlssethNfGCze.vBnQ6JiCfqe', 0, 0, NULL, '2019-11-06 15:21:50', '2019-11-06 15:21:50'),
+(25, 'Amit', NULL, '', '', 'Canada', '', '', 'amit333535@yopmail.com', '$2y$10$N1tFA3cBM1vPbtLmM0tPcuTKDvX/kLKm81IGqdg8oUoPdH9aUWud6', 0, 0, NULL, '2019-11-06 15:22:20', '2019-11-06 15:22:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wish_list`
+--
+
+CREATE TABLE `wish_list` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double(8,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `user_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -7010,6 +7106,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `wish_list`
+--
+ALTER TABLE `wish_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -7029,7 +7131,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -7077,7 +7179,7 @@ ALTER TABLE `enquiries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `newsletter_subscribers`
@@ -7089,13 +7191,13 @@ ALTER TABLE `newsletter_subscribers`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24500083;
 
 --
 -- AUTO_INCREMENT for table `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT for table `pincodes`
@@ -7137,7 +7239,13 @@ ALTER TABLE `shipping_charges`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `wish_list`
+--
+ALTER TABLE `wish_list`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
