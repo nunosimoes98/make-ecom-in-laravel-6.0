@@ -9,5 +9,5 @@ https://youtu.be/9AOPGUnMXPs
 
 Laravel Admin Panel / E-com Video Tutorial :- https://www.youtube.com/playlist?list=PLLUtELdNs2ZY5drPxIWzpq5crhantlzp7
 
-<a href="https://www.buymeacoffee.com/m8deU5C" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+<a href="https://www.buymeacoffee.com/m8deU5C" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 25px !important;width: 108px !important;" ></a>
 
