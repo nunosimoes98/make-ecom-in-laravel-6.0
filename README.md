@@ -12,7 +12,7 @@ Laravel Admin Panel / E-com Video Tutorial :- https://www.youtube.com/playlist?l
 Make E-commerce Website in Laravel 6 / Laravel 7 (Including LTE Admin Panel) :-
 https://www.youtube.com/playlist?list=PLLUtELdNs2ZaHaFmydqjcQ-YyeQ19Cd6u
 
-Please join Stack Developers Youtube Channel to get the Laravel E-commerce Part 1-200 Database and Advance E-com Series Code in Laravel 7
+Please join Stack Developers Youtube Channel to get the Laravel E-commerce Part 1-200 Database and Advance E-com Series Code in Laravel 7 :- 
 https://www.youtube.com/channel/UCExO2i-tLU1NyVZD6zOJQlw/join
 
 <a href="https://www.buymeacoffee.com/m8deU5C" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" width="180px" alt="Buy Me A Coffee to Get the Database"></a>
