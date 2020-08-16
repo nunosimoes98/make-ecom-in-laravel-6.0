@@ -2,7 +2,7 @@
 -- https://www.youtube.com/channel/UCExO2i-tLU1NyVZD6zOJQlw/join
 
 -- Free Steps to get Database :-
--- Steps to download Basic E-commerce Website in Laravel 5.6/5.7/5.8 from Part 1 to 150 that includes the admin panel for E-commerce website involving categories, products, attributes and images modules  :-
+-- Steps to download Basic E-commerce Website in Laravel 5.6/5.7/5.8/6.0 from Part 1 to 200 that includes the admin panel for E-commerce website involving categories, products, attributes and images modules  :-
 
 /*
 
@@ -11,7 +11,7 @@ http://sitemakers.in
 
 2) Click on "STACK DEVELOPERS" link at top navigation that will take you to Stack Developers section
 
-3) Click on "Login to Download" link to download Basic E-commerce Series in Laravel 6/7 (Part 1 to 150)
+3) Click on "Login to Download" link to download Basic E-commerce Series in Laravel 5.6/5.7/5.8/6.0 (Part 1 to 200)
 
 4) Enter Username and Password if you have already got it otherwise get one by taking below steps :-
 
@@ -42,7 +42,7 @@ Paid Step :-
 https://www.youtube.com/channel/UCExO2i-tLU1NyVZD6zOJQlw/join
 (Username/Password will be emailed to you or shared on Social network)
 
-5) After login, click on "Click Here to Download" link to download Basic E-commerce Series in Laravel 5.6/5.7/5.8 (Part 1 to 150).
+5) After login, click on "Click Here to Download" link to download Basic E-commerce Series in Laravel 5.6/5.7/5.8/6.0 (Part 1 to 200).
 
 This time code will get downloaded in zipped format along with database.
 
