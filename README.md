@@ -1,4 +1,4 @@
-# make-ecom-in-laravel-6.0
+# Make E-commerce Website in Laravel 6 | <a target="_blank" rel="nofollow" href="https://www.youtube.com/channel/UCExO2i-tLU1NyVZD6zOJQlw/join">Download</a> (with DB)
 
 Make E-commerce Website in Laravel 6.0 (Part 1 - 200)
 
